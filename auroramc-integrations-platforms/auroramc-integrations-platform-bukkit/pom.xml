@@ -18,12 +18,6 @@
   <dependencies>
     <dependency>
       <groupId>pl.auroramc</groupId>
-      <artifactId>auroramc-messages-platform-bukkit</artifactId>
-      <version>1.0-SNAPSHOT</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>pl.auroramc</groupId>
       <artifactId>auroramc-integrations-commands</artifactId>
       <version>1.0-SNAPSHOT</version>
       <scope>compile</scope>
@@ -31,6 +25,18 @@
     <dependency>
       <groupId>pl.auroramc</groupId>
       <artifactId>auroramc-integrations-configs</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>pl.auroramc</groupId>
+      <artifactId>auroramc-commons-platform-bukkit</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>pl.auroramc</groupId>
+      <artifactId>auroramc-messages-platform-bukkit</artifactId>
       <version>1.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
