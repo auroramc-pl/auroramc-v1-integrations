@@ -41,6 +41,12 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
+      <groupId>dev.rollczi</groupId>
+      <artifactId>litecommands-bukkit</artifactId>
+      <version>3.4.2</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
       <groupId>io.papermc.paper</groupId>
       <artifactId>paper-api</artifactId>
       <version>1.20.4-R0.1-SNAPSHOT</version>
