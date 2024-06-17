@@ -35,12 +35,6 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>pl.auroramc</groupId>
-      <artifactId>auroramc-commons-integration-okaeri-configs</artifactId>
-      <version>${project.parent.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
       <groupId>dev.rollczi</groupId>
       <artifactId>litecommands-framework</artifactId>
       <version>3.4.2</version>
