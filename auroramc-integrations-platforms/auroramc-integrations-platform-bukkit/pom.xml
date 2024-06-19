@@ -30,6 +30,12 @@
     </dependency>
     <dependency>
       <groupId>pl.auroramc</groupId>
+      <artifactId>auroramc-integrations-dsl</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>pl.auroramc</groupId>
       <artifactId>auroramc-commons-platform-bukkit</artifactId>
       <version>1.0-SNAPSHOT</version>
       <scope>compile</scope>

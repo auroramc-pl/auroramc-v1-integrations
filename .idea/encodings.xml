@@ -5,6 +5,8 @@
     <file url="file://$PROJECT_DIR$/auroramc-integrations-commands/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/auroramc-integrations-configs/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/auroramc-integrations-configs/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/auroramc-integrations-dsl/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/auroramc-integrations-dsl/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/auroramc-integrations-juliet/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/auroramc-integrations-juliet/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/auroramc-integrations-platforms/auroramc-integrations-platform-bukkit/src/main/java" charset="UTF-8" />

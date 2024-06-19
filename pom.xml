@@ -12,6 +12,7 @@
     <module>auroramc-integrations-commands</module>
     <module>auroramc-integrations-configs</module>
     <module>auroramc-integrations-platforms</module>
+    <module>auroramc-integrations-dsl</module>
   </modules>
 
   <properties>
