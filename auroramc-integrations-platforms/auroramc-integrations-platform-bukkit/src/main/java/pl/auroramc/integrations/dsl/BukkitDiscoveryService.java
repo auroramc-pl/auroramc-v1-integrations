@@ -15,15 +15,14 @@ public class BukkitDiscoveryService<T> extends DiscoveryService<T> {
           .toArray(String[]::new);
 
   public BukkitDiscoveryService(
-      final ClassLoader parentClassLoader, final String parentClosure, final Class<T> elementType) {
-    super(parentClassLoader, parentClosure, elementType);
+      final ClassLoader parentClassLoader, final Class<T> elementType) {
+    super(parentClassLoader, elementType);
   }
 
   @Override
   public ImportCustomizer getImportCustomizer() {
     final ImportCustomizer importCustomizer = new ImportCustomizer();
     importCustomizer.addImports(IMPORT_CLASS_NAMES);
-    importCustomizer.addStaticImport(elementType.getName(), parentClosure);
     return importCustomizer;
   }
 }

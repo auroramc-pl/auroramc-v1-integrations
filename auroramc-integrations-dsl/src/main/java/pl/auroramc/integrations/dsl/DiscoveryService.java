@@ -15,15 +15,13 @@ import org.codehaus.groovy.control.customizers.ImportCustomizer;
 
 abstract class DiscoveryService<T> implements DiscoveryFacade<T> {
 
-  protected final String parentClosure;
   protected final Class<T> elementType;
   private final ClassLoader parentClassLoader;
   private final GroovyShell shell;
 
   protected DiscoveryService(
-      final ClassLoader parentClassLoader, final String parentClosure, final Class<T> elementType) {
+      final ClassLoader parentClassLoader, final Class<T> elementType) {
     this.parentClassLoader = parentClassLoader;
-    this.parentClosure = parentClosure;
     this.elementType = elementType;
     this.shell = getDefaultShell();
   }
