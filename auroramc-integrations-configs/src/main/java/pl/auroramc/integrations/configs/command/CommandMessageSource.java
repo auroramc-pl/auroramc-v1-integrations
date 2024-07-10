@@ -7,10 +7,10 @@ public class CommandMessageSource extends OkaeriConfig {
 
   public MutableMessage commandOnCooldown =
       MutableMessage.of(
-          "<red>Musisz odczekać jeszcze <yellow>{duration}<red>, zanim ponownie użyjesz tej komendy.");
+          "<red>Musisz odczekać jeszcze <yellow><duration><red>, zanim ponownie użyjesz tej komendy.");
 
   public MutableMessage availableSchematicsSuggestion =
-      MutableMessage.of("<red>Poprawne użycie: <yellow><newline>{schematics}");
+      MutableMessage.of("<red>Poprawne użycie: <yellow><newline><schematics>");
 
   public MutableMessage executionOfCommandIsNotPermitted =
       MutableMessage.of("<red>Nie posiadasz wystarczających uprawnień aby użyć tej komendy.");

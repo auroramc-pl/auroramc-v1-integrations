@@ -3,6 +3,7 @@ package pl.auroramc.integrations.commands.schematic;
 import static dev.rollczi.litecommands.meta.Meta.DESCRIPTION;
 import static java.lang.String.join;
 import static java.util.stream.Collectors.joining;
+import static pl.auroramc.commons.format.StringUtils.BLANK;
 
 import dev.rollczi.litecommands.command.executor.CommandExecutor;
 import dev.rollczi.litecommands.schematic.SchematicFormat;
@@ -15,7 +16,6 @@ import java.util.List;
 public class DefaultSchematicGenerator<T> extends SimpleSchematicGenerator<T> {
 
   private static final String SEPARATOR = " ";
-  private static final String BLANK_OUTPUT = "";
   private static final String DESCRIPTION_FORMAT = " - %s";
 
   public DefaultSchematicGenerator(
@@ -37,14 +37,14 @@ public class DefaultSchematicGenerator<T> extends SimpleSchematicGenerator<T> {
             .collect(joining(SEPARATOR));
     final String description = generateDescriptionMeta(executor);
     final String appendix =
-        description.isEmpty() ? BLANK_OUTPUT : DESCRIPTION_FORMAT.formatted(description);
+        description.isEmpty() ? BLANK : DESCRIPTION_FORMAT.formatted(description);
     return original + appendix;
   }
 
   protected String generateDescriptionMeta(final CommandExecutor<T> executor) {
     final List<List<String>> descriptions = executor.metaCollector().collect(DESCRIPTION);
     if (descriptions.isEmpty()) {
-      return BLANK_OUTPUT;
+      return BLANK;
     }
     return join(SEPARATOR, descriptions.getFirst());
   }
