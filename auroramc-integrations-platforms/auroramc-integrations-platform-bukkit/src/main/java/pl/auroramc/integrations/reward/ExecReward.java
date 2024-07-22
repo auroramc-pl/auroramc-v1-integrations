@@ -4,13 +4,13 @@ import java.util.List;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
 
-public class ExecQuestReward implements Reward {
+public class ExecReward implements Reward {
 
   private static final String TARGET_VARIABLE_NAME = "<target>";
   private final Server server;
   private final List<String> templatesOfCommands;
 
-  public ExecQuestReward(final Server server, final List<String> templatesOfCommands) {
+  public ExecReward(final Server server, final List<String> templatesOfCommands) {
     this.server = server;
     this.templatesOfCommands = templatesOfCommands;
   }

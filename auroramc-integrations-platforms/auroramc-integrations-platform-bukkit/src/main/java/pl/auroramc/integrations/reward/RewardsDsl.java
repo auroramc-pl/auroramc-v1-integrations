@@ -15,12 +15,12 @@ public class RewardsDsl {
 
   private final List<Reward> rewards;
 
-  RewardsDsl() {
+  public RewardsDsl() {
     this.rewards = new ArrayList<>();
   }
 
   public void item(final ItemStack item) {
-    rewards.add(new ItemQuestReward(item));
+    rewards.add(new ItemReward(item));
   }
 
   public void item(final @DelegatesTo(ItemStackBuilder.class) Closure<?> closure) {
@@ -28,11 +28,11 @@ public class RewardsDsl {
     closure.setDelegate(delegate);
     closure.setResolveStrategy(DELEGATE_ONLY);
     closure.call();
-    rewards.add(new ItemQuestReward(delegate.build()));
+    rewards.add(new ItemReward(delegate.build()));
   }
 
   public void exec(final List<String> commands) {
-    rewards.add(new ExecQuestReward(getServer(), commands));
+    rewards.add(new ExecReward(getServer(), commands));
   }
 
   public void exec(final String... commands) {
