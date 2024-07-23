@@ -1,5 +1,6 @@
 package pl.auroramc.integrations.dsl;
 
+import groovy.lang.Binding;
 import java.util.stream.Stream;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -17,6 +18,11 @@ public class BukkitDiscoveryService<T> extends DiscoveryService<T> {
   public BukkitDiscoveryService(
       final ClassLoader parentClassLoader, final Class<T> elementType) {
     super(parentClassLoader, elementType);
+  }
+
+  public BukkitDiscoveryService(
+      final ClassLoader parentClassLoader, final Binding binding, final Class<T> elementType) {
+    super(parentClassLoader, binding, elementType);
   }
 
   @Override

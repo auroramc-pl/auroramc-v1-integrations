@@ -3,6 +3,7 @@ package pl.auroramc.integrations.dsl;
 import static java.nio.file.Files.walk;
 import static java.util.stream.Collectors.toUnmodifiableSet;
 
+import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -19,10 +20,16 @@ abstract class DiscoveryService<T> implements DiscoveryFacade<T> {
   private final ClassLoader parentClassLoader;
   private final GroovyShell shell;
 
-  protected DiscoveryService(final ClassLoader parentClassLoader, final Class<T> elementType) {
+  protected DiscoveryService(
+      final ClassLoader parentClassLoader, final Binding binding, final Class<T> elementType) {
     this.parentClassLoader = parentClassLoader;
     this.elementType = elementType;
-    this.shell = getDefaultShell();
+    this.shell = getDefaultShell(binding);
+  }
+
+  protected DiscoveryService(
+      final ClassLoader parentClassLoader, final Class<T> elementType) {
+    this(parentClassLoader, new Binding(), elementType);
   }
 
   public abstract ImportCustomizer getImportCustomizer();
@@ -68,9 +75,9 @@ abstract class DiscoveryService<T> implements DiscoveryFacade<T> {
     }
   }
 
-  private GroovyShell getDefaultShell() {
+  private GroovyShell getDefaultShell(final Binding binding) {
     final CompilerConfiguration compilerConfiguration = new CompilerConfiguration();
     compilerConfiguration.addCompilationCustomizers(getImportCustomizer());
-    return new GroovyShell(parentClassLoader, getBinding(), compilerConfiguration);
+    return new GroovyShell(parentClassLoader, binding, compilerConfiguration);
   }
 }
