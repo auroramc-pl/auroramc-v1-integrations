@@ -19,8 +19,7 @@ abstract class DiscoveryService<T> implements DiscoveryFacade<T> {
   private final ClassLoader parentClassLoader;
   private final GroovyShell shell;
 
-  protected DiscoveryService(
-      final ClassLoader parentClassLoader, final Class<T> elementType) {
+  protected DiscoveryService(final ClassLoader parentClassLoader, final Class<T> elementType) {
     this.parentClassLoader = parentClassLoader;
     this.elementType = elementType;
     this.shell = getDefaultShell();
@@ -69,9 +68,9 @@ abstract class DiscoveryService<T> implements DiscoveryFacade<T> {
     }
   }
 
-  public GroovyShell getDefaultShell() {
+  private GroovyShell getDefaultShell() {
     final CompilerConfiguration compilerConfiguration = new CompilerConfiguration();
     compilerConfiguration.addCompilationCustomizers(getImportCustomizer());
-    return new GroovyShell(parentClassLoader, compilerConfiguration);
+    return new GroovyShell(parentClassLoader, getBinding(), compilerConfiguration);
   }
 }
