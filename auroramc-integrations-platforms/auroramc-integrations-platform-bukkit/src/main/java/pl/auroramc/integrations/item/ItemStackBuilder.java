@@ -22,7 +22,8 @@ import pl.auroramc.messages.message.compiler.CompiledMessage;
 
 public final class ItemStackBuilder {
 
-  private final ItemStack itemStack;
+  private static final int MAXIMUM_LINE_LENGTH = 36;
+  private ItemStack itemStack;
   private ItemMeta itemMeta;
 
   private ItemStackBuilder(final ItemStack itemStack) {
@@ -51,8 +52,8 @@ public final class ItemStackBuilder {
     return displayName(miniMessage().deserialize(unparsedDisplayName).decoration(ITALIC, FALSE));
   }
 
-  public ItemStackBuilder type(final Material material) {
-    itemStack.setType(material);
+  public ItemStackBuilder type(final Material type) {
+    itemStack = itemStack.withType(type);
     itemMeta = itemStack.getItemMeta();
     return this;
   }
@@ -63,7 +64,7 @@ public final class ItemStackBuilder {
   }
 
   public ItemStackBuilder lore(final Component... lines) {
-    itemMeta.lore(Stream.of(lines).flatMap(line -> wrap(line, 36).stream()).toList());
+    itemMeta.lore(Stream.of(lines).flatMap(line -> wrap(line, MAXIMUM_LINE_LENGTH).stream()).toList());
     return this;
   }
 
