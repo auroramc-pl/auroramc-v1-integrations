@@ -4,11 +4,12 @@ import static java.util.Arrays.stream;
 import static net.kyori.adventure.text.format.TextDecoration.ITALIC;
 import static net.kyori.adventure.text.format.TextDecoration.State.FALSE;
 import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
+import static pl.auroramc.integrations.kyori.ComponentWrapper.wrap;
 
-import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -62,7 +63,7 @@ public final class ItemStackBuilder {
   }
 
   public ItemStackBuilder lore(final Component... lines) {
-    itemMeta.lore(List.of(lines));
+    itemMeta.lore(Stream.of(lines).flatMap(line -> wrap(line, 36).stream()).toList());
     return this;
   }
 
