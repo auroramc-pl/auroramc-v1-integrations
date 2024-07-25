@@ -6,6 +6,7 @@ import static net.kyori.adventure.text.format.TextDecoration.State.FALSE;
 import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
 import static pl.auroramc.integrations.kyori.ComponentWrapper.wrap;
 
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -64,7 +65,7 @@ public final class ItemStackBuilder {
   }
 
   public ItemStackBuilder lore(final Component... lines) {
-    itemMeta.lore(Stream.of(lines).flatMap(line -> wrap(line, MAXIMUM_LINE_LENGTH).stream()).toList());
+    itemMeta.lore(List.of(lines));
     return this;
   }
 
@@ -75,6 +76,21 @@ public final class ItemStackBuilder {
 
   public ItemStackBuilder lore(final CompiledMessage... lines) {
     return lore(resolveComponent(CompiledMessage::getComponent, lines));
+  }
+
+  public ItemStackBuilder loreWrapped(final Component... lines) {
+    itemMeta.lore(
+        Stream.of(lines).flatMap(line -> wrap(line, MAXIMUM_LINE_LENGTH).stream()).toList());
+    return this;
+  }
+
+  public ItemStackBuilder loreWrapped(final String... lines) {
+    return loreWrapped(
+        resolveComponent(line -> miniMessage().deserialize(line).decoration(ITALIC, FALSE), lines));
+  }
+
+  public ItemStackBuilder loreWrapped(final CompiledMessage... lines) {
+    return loreWrapped(resolveComponent(CompiledMessage::getComponent, lines));
   }
 
   public <K, V> ItemStackBuilder data(
