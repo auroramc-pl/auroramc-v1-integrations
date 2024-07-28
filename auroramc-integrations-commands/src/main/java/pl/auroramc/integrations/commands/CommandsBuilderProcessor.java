@@ -16,25 +16,38 @@ import java.math.BigDecimal;
 import net.kyori.adventure.audience.Audience;
 import pl.auroramc.integrations.commands.argument.resolver.standard.BigDecimalArgumentResolver;
 import pl.auroramc.integrations.commands.handler.result.message.CompiledMessageHandler;
+import pl.auroramc.integrations.commands.handler.result.message.MessageHandler;
 import pl.auroramc.integrations.commands.handler.result.message.MutableMessageGroupHandler;
 import pl.auroramc.integrations.commands.handler.result.message.MutableMessageHandler;
 import pl.auroramc.integrations.commands.schematic.DefaultSchematicGenerator;
 import pl.auroramc.integrations.configs.command.CommandMessageSource;
+import pl.auroramc.messages.i18n.Message;
+import pl.auroramc.messages.i18n.MessageFacade;
 import pl.auroramc.messages.message.MutableMessage;
 import pl.auroramc.messages.message.compiler.CompiledMessage;
 import pl.auroramc.messages.message.compiler.MessageCompiler;
 import pl.auroramc.messages.message.group.MutableMessageGroup;
+import pl.auroramc.messages.viewer.Viewer;
+import pl.auroramc.messages.viewer.ViewerFacade;
 
-public class CommandsBuilderProcessor<SENDER extends Audience, SETTINGS extends PlatformSettings>
+public class CommandsBuilderProcessor<
+        SENDER extends Audience, VIEWER extends Viewer, SETTINGS extends PlatformSettings>
     implements LiteBuilderProcessor<SENDER, SETTINGS> {
 
   private final CommandMessageSource messageSource;
-  private final MessageCompiler<SENDER> messageCompiler;
+  private final MessageFacade<MutableMessage> messageFacade;
+  private final MessageCompiler<VIEWER> messageCompiler;
+  private final ViewerFacade<VIEWER> viewerFacade;
 
   public CommandsBuilderProcessor(
-      final CommandMessageSource messageSource, final MessageCompiler<SENDER> messageCompiler) {
+      final CommandMessageSource messageSource,
+      final MessageFacade<MutableMessage> messageFacade,
+      final MessageCompiler<VIEWER> messageCompiler,
+      final ViewerFacade<VIEWER> viewerFacade) {
     this.messageSource = messageSource;
+    this.messageFacade = messageFacade;
     this.messageCompiler = messageCompiler;
+    this.viewerFacade = viewerFacade;
   }
 
   @Override
@@ -57,6 +70,7 @@ public class CommandsBuilderProcessor<SENDER extends Audience, SETTINGS extends 
         .schematicGenerator(
             new DefaultSchematicGenerator<>(
                 angleBrackets(), internal.getValidatorService(), internal.getWrapperRegistry()))
+        .result(Message.class, new MessageHandler<>(messageFacade, messageCompiler, viewerFacade))
         .result(CompiledMessage.class, new CompiledMessageHandler<>())
         .result(MutableMessage.class, new MutableMessageHandler<>(messageCompiler))
         .result(MutableMessageGroup.class, new MutableMessageGroupHandler<>(messageCompiler));

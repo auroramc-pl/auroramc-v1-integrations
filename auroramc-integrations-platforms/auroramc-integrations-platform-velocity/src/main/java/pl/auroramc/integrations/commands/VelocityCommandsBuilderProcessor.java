@@ -11,20 +11,26 @@ import dev.rollczi.litecommands.velocity.tools.VelocityOnlyPlayerContextual;
 import pl.auroramc.integrations.commands.argument.resolver.PlayerArgumentResolver;
 import pl.auroramc.integrations.commands.permission.DefaultMissingPermissionsHandler;
 import pl.auroramc.integrations.configs.command.CommandMessageSource;
-import pl.auroramc.messages.message.compiler.MessageCompiler;
+import pl.auroramc.messages.i18n.MessageFacade;
+import pl.auroramc.messages.message.MutableMessage;
+import pl.auroramc.messages.message.compiler.VelocityMessageCompiler;
+import pl.auroramc.messages.viewer.VelocityViewer;
+import pl.auroramc.messages.viewer.ViewerFacade;
 
 public class VelocityCommandsBuilderProcessor
-    extends CommandsBuilderProcessor<CommandSource, LiteVelocitySettings> {
+    extends CommandsBuilderProcessor<CommandSource, VelocityViewer, LiteVelocitySettings> {
 
   private final ProxyServer server;
   private final CommandMessageSource messageSource;
-  private final MessageCompiler<CommandSource> messageCompiler;
+  private final VelocityMessageCompiler messageCompiler;
 
   public VelocityCommandsBuilderProcessor(
       final ProxyServer server,
       final CommandMessageSource messageSource,
-      final MessageCompiler<CommandSource> messageCompiler) {
-    super(messageSource, messageCompiler);
+      final MessageFacade<MutableMessage> messageFacade,
+      final VelocityMessageCompiler messageCompiler,
+      final ViewerFacade<VelocityViewer> viewerFacade) {
+    super(messageSource, messageFacade, messageCompiler, viewerFacade);
     this.server = server;
     this.messageSource = messageSource;
     this.messageCompiler = messageCompiler;

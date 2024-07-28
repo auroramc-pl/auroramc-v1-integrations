@@ -6,16 +6,16 @@ import dev.rollczi.litecommands.permission.MissingPermissions;
 import dev.rollczi.litecommands.permission.MissingPermissionsHandler;
 import net.kyori.adventure.audience.Audience;
 import pl.auroramc.integrations.configs.command.CommandMessageSource;
-import pl.auroramc.messages.message.compiler.MessageCompiler;
+import pl.auroramc.messages.message.compiler.VelocityMessageCompiler;
 
 public class DefaultMissingPermissionsHandler<T extends Audience>
     implements MissingPermissionsHandler<T> {
 
   private final CommandMessageSource messageSource;
-  private final MessageCompiler<T> messageCompiler;
+  private final VelocityMessageCompiler messageCompiler;
 
   public DefaultMissingPermissionsHandler(
-      final CommandMessageSource messageSource, final MessageCompiler<T> messageCompiler) {
+      final CommandMessageSource messageSource, final VelocityMessageCompiler messageCompiler) {
     this.messageSource = messageSource;
     this.messageCompiler = messageCompiler;
   }
