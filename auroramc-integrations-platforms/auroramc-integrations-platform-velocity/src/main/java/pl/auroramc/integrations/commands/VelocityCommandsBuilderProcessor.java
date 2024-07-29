@@ -11,11 +11,10 @@ import dev.rollczi.litecommands.velocity.tools.VelocityOnlyPlayerContextual;
 import pl.auroramc.integrations.commands.argument.resolver.PlayerArgumentResolver;
 import pl.auroramc.integrations.commands.permission.DefaultMissingPermissionsHandler;
 import pl.auroramc.integrations.configs.command.CommandMessageSource;
-import pl.auroramc.messages.i18n.MessageFacade;
-import pl.auroramc.messages.message.MutableMessage;
+import pl.auroramc.messages.i18n.VelocityMessageFacade;
 import pl.auroramc.messages.message.compiler.VelocityMessageCompiler;
 import pl.auroramc.messages.viewer.VelocityViewer;
-import pl.auroramc.messages.viewer.ViewerFacade;
+import pl.auroramc.messages.viewer.VelocityViewerFacade;
 
 public class VelocityCommandsBuilderProcessor
     extends CommandsBuilderProcessor<CommandSource, VelocityViewer, LiteVelocitySettings> {
@@ -23,17 +22,19 @@ public class VelocityCommandsBuilderProcessor
   private final ProxyServer server;
   private final CommandMessageSource messageSource;
   private final VelocityMessageCompiler messageCompiler;
+  private final VelocityViewerFacade viewerFacade;
 
   public VelocityCommandsBuilderProcessor(
       final ProxyServer server,
       final CommandMessageSource messageSource,
-      final MessageFacade<MutableMessage> messageFacade,
+      final VelocityMessageFacade messageFacade,
       final VelocityMessageCompiler messageCompiler,
-      final ViewerFacade<VelocityViewer> viewerFacade) {
+      final VelocityViewerFacade viewerFacade) {
     super(messageSource, messageFacade, messageCompiler, viewerFacade);
     this.server = server;
     this.messageSource = messageSource;
     this.messageCompiler = messageCompiler;
+    this.viewerFacade = viewerFacade;
   }
 
   @Override
@@ -47,7 +48,7 @@ public class VelocityCommandsBuilderProcessor
             new VelocityOnlyPlayerContextual<>(messageSource.executionFromConsoleIsUnsupported))
         .result(
             MissingPermissions.class,
-            new DefaultMissingPermissionsHandler<>(messageSource, messageCompiler))
+            new DefaultMissingPermissionsHandler<>(messageSource, messageCompiler, viewerFacade))
         .argument(Player.class, new PlayerArgumentResolver<>(server, messageSource));
   }
 }

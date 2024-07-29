@@ -1,15 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>auroramc-integrations-configs</artifactId>
+  <dependencies>
+    <dependency>
+      <artifactId>auroramc-commons-core</artifactId>
+      <groupId>pl.auroramc</groupId>
+      <scope>provided</scope>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <artifactId>auroramc-messages-core</artifactId>
+      <groupId>pl.auroramc</groupId>
+      <scope>provided</scope>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <artifactId>juliet</artifactId>
+      <groupId>moe.rafal</groupId>
+      <scope>provided</scope>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <artifactId>okaeri-configs-core</artifactId>
+      <groupId>eu.okaeri</groupId>
+      <scope>provided</scope>
+      <version>5.0.2</version>
+    </dependency>
+    <dependency>
+      <artifactId>okaeri-configs-serdes-commons</artifactId>
+      <groupId>eu.okaeri</groupId>
+      <scope>compile</scope>
+      <version>5.0.2</version>
+    </dependency>
+  </dependencies>
+
   <modelVersion>4.0.0</modelVersion>
+
   <parent>
-    <groupId>pl.auroramc</groupId>
     <artifactId>auroramc-integrations</artifactId>
+    <groupId>pl.auroramc</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
-
-  <artifactId>auroramc-integrations-configs</artifactId>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -21,38 +54,5 @@
       <url>https://storehouse.okaeri.eu/repository/maven-public/</url>
     </repository>
   </repositories>
-
-  <dependencies>
-    <dependency>
-      <groupId>pl.auroramc</groupId>
-      <artifactId>auroramc-commons-core</artifactId>
-      <version>1.0-SNAPSHOT</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>pl.auroramc</groupId>
-      <artifactId>auroramc-messages-core</artifactId>
-      <version>1.0-SNAPSHOT</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>moe.rafal</groupId>
-      <artifactId>juliet</artifactId>
-      <version>1.0-SNAPSHOT</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>eu.okaeri</groupId>
-      <artifactId>okaeri-configs-core</artifactId>
-      <version>5.0.2</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>eu.okaeri</groupId>
-      <artifactId>okaeri-configs-serdes-commons</artifactId>
-      <version>5.0.2</version>
-      <scope>compile</scope>
-    </dependency>
-  </dependencies>
 
 </project>

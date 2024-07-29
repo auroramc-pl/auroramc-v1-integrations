@@ -27,8 +27,7 @@ abstract class DiscoveryService<T> implements DiscoveryFacade<T> {
     this.shell = getDefaultShell(binding);
   }
 
-  protected DiscoveryService(
-      final ClassLoader parentClassLoader, final Class<T> elementType) {
+  protected DiscoveryService(final ClassLoader parentClassLoader, final Class<T> elementType) {
     this(parentClassLoader, new Binding(), elementType);
   }
 

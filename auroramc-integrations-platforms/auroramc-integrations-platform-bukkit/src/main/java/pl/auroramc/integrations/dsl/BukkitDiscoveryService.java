@@ -15,8 +15,7 @@ public class BukkitDiscoveryService<T> extends DiscoveryService<T> {
           .map(Class::getName)
           .toArray(String[]::new);
 
-  public BukkitDiscoveryService(
-      final ClassLoader parentClassLoader, final Class<T> elementType) {
+  public BukkitDiscoveryService(final ClassLoader parentClassLoader, final Class<T> elementType) {
     super(parentClassLoader, elementType);
   }
 

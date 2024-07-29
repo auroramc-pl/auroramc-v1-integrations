@@ -12,8 +12,9 @@ import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.Style;
 
 /**
- * Source: {@link <a href="https://gist.github.com/Minikloon/e6a7679d171b90dc4e0731db46d77c84">Kyori Adventure Component Word Wrapping</a>}
- * Author: {@link <a href="https://github.com/Minikloon">Minikloon</a>}
+ * Source: {@link <a href="https://gist.github.com/Minikloon/e6a7679d171b90dc4e0731db46d77c84">Kyori
+ * Adventure Component Word Wrapping</a>} Author: {@link <a
+ * href="https://github.com/Minikloon">Minikloon</a>}
  */
 public final class ComponentWrapper {
 

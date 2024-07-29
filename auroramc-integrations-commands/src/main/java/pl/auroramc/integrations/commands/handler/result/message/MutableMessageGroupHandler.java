@@ -6,14 +6,13 @@ import dev.rollczi.litecommands.invocation.Invocation;
 import net.kyori.adventure.audience.Audience;
 import pl.auroramc.messages.message.compiler.MessageCompiler;
 import pl.auroramc.messages.message.group.MutableMessageGroup;
-import pl.auroramc.messages.viewer.Viewer;
 
-public class MutableMessageGroupHandler<SENDER extends Audience, VIEWER extends Viewer>
+public class MutableMessageGroupHandler<SENDER extends Audience>
     implements ResultHandler<SENDER, MutableMessageGroup> {
 
-  private final MessageCompiler<VIEWER> messageCompiler;
+  private final MessageCompiler messageCompiler;
 
-  public MutableMessageGroupHandler(final MessageCompiler<VIEWER> messageCompiler) {
+  public MutableMessageGroupHandler(final MessageCompiler messageCompiler) {
     this.messageCompiler = messageCompiler;
   }
 

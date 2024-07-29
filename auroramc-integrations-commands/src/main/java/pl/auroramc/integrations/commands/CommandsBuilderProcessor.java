@@ -36,13 +36,13 @@ public class CommandsBuilderProcessor<
 
   private final CommandMessageSource messageSource;
   private final MessageFacade<MutableMessage> messageFacade;
-  private final MessageCompiler<VIEWER> messageCompiler;
+  private final MessageCompiler messageCompiler;
   private final ViewerFacade<VIEWER> viewerFacade;
 
   public CommandsBuilderProcessor(
       final CommandMessageSource messageSource,
       final MessageFacade<MutableMessage> messageFacade,
-      final MessageCompiler<VIEWER> messageCompiler,
+      final MessageCompiler messageCompiler,
       final ViewerFacade<VIEWER> viewerFacade) {
     this.messageSource = messageSource;
     this.messageFacade = messageFacade;
@@ -71,8 +71,8 @@ public class CommandsBuilderProcessor<
             new DefaultSchematicGenerator<>(
                 angleBrackets(), internal.getValidatorService(), internal.getWrapperRegistry()))
         .result(Message.class, new MessageHandler<>(messageFacade, messageCompiler, viewerFacade))
-        .result(CompiledMessage.class, new CompiledMessageHandler<>())
-        .result(MutableMessage.class, new MutableMessageHandler<>(messageCompiler))
+        .result(CompiledMessage.class, new CompiledMessageHandler<>(viewerFacade))
+        .result(MutableMessage.class, new MutableMessageHandler<>(messageCompiler, viewerFacade))
         .result(MutableMessageGroup.class, new MutableMessageGroupHandler<>(messageCompiler));
   }
 }

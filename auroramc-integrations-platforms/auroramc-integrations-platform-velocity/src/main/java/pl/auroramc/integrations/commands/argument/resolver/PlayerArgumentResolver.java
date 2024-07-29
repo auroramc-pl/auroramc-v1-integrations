@@ -22,7 +22,8 @@ public class PlayerArgumentResolver<T extends Audience> extends ArgumentResolver
   private final CommandMessageSource messageSource;
   private final Supplier<SuggestionResult> memoizedPlayers;
 
-  public PlayerArgumentResolver(final ProxyServer server, final CommandMessageSource messageSource) {
+  public PlayerArgumentResolver(
+      final ProxyServer server, final CommandMessageSource messageSource) {
     this.server = server;
     this.messageSource = messageSource;
     this.memoizedPlayers = memoize(ofSeconds(5), this::getPlayerSuggestions);
