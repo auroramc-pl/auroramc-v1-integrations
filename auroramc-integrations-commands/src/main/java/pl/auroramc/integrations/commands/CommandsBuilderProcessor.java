@@ -4,23 +4,27 @@ import static dev.rollczi.litecommands.message.LiteMessages.COMMAND_COOLDOWN;
 import static dev.rollczi.litecommands.message.LiteMessages.INVALID_USAGE;
 import static dev.rollczi.litecommands.message.LiteMessages.MISSING_PERMISSIONS;
 import static dev.rollczi.litecommands.schematic.SchematicFormat.angleBrackets;
-import static pl.auroramc.integrations.configs.command.CommandMessageSourcePaths.DURATION_PATH;
-import static pl.auroramc.integrations.configs.command.CommandMessageSourcePaths.SCHEMATICS_PATH;
-import static pl.auroramc.messages.message.MutableMessage.LINE_DELIMITER;
+import static net.kyori.adventure.text.Component.empty;
+import static pl.auroramc.integrations.configs.message.IntegrationsMessageSourcePaths.DURATION_PATH;
+import static pl.auroramc.integrations.configs.message.IntegrationsMessageSourcePaths.SCHEMATICS_PATH;
+import static pl.auroramc.messages.i18n.Message.message;
 
 import dev.rollczi.litecommands.LiteCommandsBuilder;
 import dev.rollczi.litecommands.LiteCommandsInternal;
 import dev.rollczi.litecommands.platform.PlatformSettings;
 import dev.rollczi.litecommands.processor.LiteBuilderProcessor;
+import dev.rollczi.litecommands.schematic.Schematic;
 import java.math.BigDecimal;
 import net.kyori.adventure.audience.Audience;
+import net.kyori.adventure.text.Component;
+import pl.auroramc.commons.component.ComponentReducer;
 import pl.auroramc.integrations.commands.argument.resolver.standard.BigDecimalArgumentResolver;
 import pl.auroramc.integrations.commands.handler.result.message.CompiledMessageHandler;
 import pl.auroramc.integrations.commands.handler.result.message.MessageHandler;
 import pl.auroramc.integrations.commands.handler.result.message.MutableMessageGroupHandler;
 import pl.auroramc.integrations.commands.handler.result.message.MutableMessageHandler;
 import pl.auroramc.integrations.commands.schematic.DefaultSchematicGenerator;
-import pl.auroramc.integrations.configs.command.CommandMessageSource;
+import pl.auroramc.integrations.configs.message.IntegrationsMessageSource;
 import pl.auroramc.messages.i18n.Message;
 import pl.auroramc.messages.i18n.MessageFacade;
 import pl.auroramc.messages.message.MutableMessage;
@@ -34,13 +38,13 @@ public class CommandsBuilderProcessor<
         SENDER extends Audience, VIEWER extends Viewer, SETTINGS extends PlatformSettings>
     implements LiteBuilderProcessor<SENDER, SETTINGS> {
 
-  private final CommandMessageSource messageSource;
+  private final IntegrationsMessageSource messageSource;
   private final MessageFacade<MutableMessage> messageFacade;
   private final MessageCompiler messageCompiler;
   private final ViewerFacade<VIEWER> viewerFacade;
 
   public CommandsBuilderProcessor(
-      final CommandMessageSource messageSource,
+      final IntegrationsMessageSource messageSource,
       final MessageFacade<MutableMessage> messageFacade,
       final MessageCompiler messageCompiler,
       final ViewerFacade<VIEWER> viewerFacade) {
@@ -59,14 +63,14 @@ public class CommandsBuilderProcessor<
         .message(
             INVALID_USAGE,
             context ->
-                messageSource.availableSchematicsSuggestion.placeholder(
-                    SCHEMATICS_PATH, context.getSchematic().join(LINE_DELIMITER)))
-        .message(MISSING_PERMISSIONS, messageSource.executionOfCommandIsNotPermitted)
+                message(messageSource.availableSchematicsSuggestion)
+                    .placeholder(SCHEMATICS_PATH, getMergedSchematics(context.getSchematic())))
+        .message(MISSING_PERMISSIONS, message(messageSource.executionOfCommandIsNotPermitted))
         .message(
             COMMAND_COOLDOWN,
             context ->
-                messageSource.commandOnCooldown.placeholder(
-                    DURATION_PATH, context.getRemainingDuration()))
+                message(messageSource.commandOnCooldown)
+                    .placeholder(DURATION_PATH, context.getRemainingDuration()))
         .schematicGenerator(
             new DefaultSchematicGenerator<>(
                 angleBrackets(), internal.getValidatorService(), internal.getWrapperRegistry()))
@@ -74,5 +78,12 @@ public class CommandsBuilderProcessor<
         .result(CompiledMessage.class, new CompiledMessageHandler<>(viewerFacade))
         .result(MutableMessage.class, new MutableMessageHandler<>(messageCompiler, viewerFacade))
         .result(MutableMessageGroup.class, new MutableMessageGroupHandler<>(messageCompiler));
+  }
+
+  private Component getMergedSchematics(final Schematic schematic) {
+    return schematic.all().stream()
+        .map(Component::text)
+        .map(Component.class::cast)
+        .reduce(empty(), new ComponentReducer());
   }
 }

@@ -3,6 +3,7 @@ package pl.auroramc.integrations.commands.argument.resolver;
 import static dev.rollczi.litecommands.argument.parser.ParseResult.failure;
 import static java.time.Duration.ofSeconds;
 import static pl.auroramc.commons.memoize.MemoizedSupplier.memoize;
+import static pl.auroramc.messages.i18n.Message.message;
 
 import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.ProxyServer;
@@ -14,16 +15,16 @@ import dev.rollczi.litecommands.suggestion.SuggestionContext;
 import dev.rollczi.litecommands.suggestion.SuggestionResult;
 import java.util.function.Supplier;
 import net.kyori.adventure.audience.Audience;
-import pl.auroramc.integrations.configs.command.CommandMessageSource;
+import pl.auroramc.integrations.configs.message.IntegrationsMessageSource;
 
 public class PlayerArgumentResolver<T extends Audience> extends ArgumentResolver<T, Player> {
 
   private final ProxyServer server;
-  private final CommandMessageSource messageSource;
+  private final IntegrationsMessageSource messageSource;
   private final Supplier<SuggestionResult> memoizedPlayers;
 
   public PlayerArgumentResolver(
-      final ProxyServer server, final CommandMessageSource messageSource) {
+      final ProxyServer server, final IntegrationsMessageSource messageSource) {
     this.server = server;
     this.messageSource = messageSource;
     this.memoizedPlayers = memoize(ofSeconds(5), this::getPlayerSuggestions);
@@ -35,7 +36,7 @@ public class PlayerArgumentResolver<T extends Audience> extends ArgumentResolver
     return server
         .getPlayer(argument)
         .map(ParseResult::success)
-        .orElseGet(() -> failure(messageSource.specifiedPlayerIsUnknown));
+        .orElseGet(() -> failure(message(messageSource.specifiedPlayerIsUnknown)));
   }
 
   @Override
