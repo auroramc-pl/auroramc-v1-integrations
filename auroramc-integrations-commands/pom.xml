@@ -26,7 +26,7 @@
       <artifactId>litecommands-framework</artifactId>
       <groupId>dev.rollczi</groupId>
       <scope>provided</scope>
-      <version>3.4.2</version>
+      <version>3.4.3</version>
     </dependency>
     <dependency>
       <artifactId>adventure-api</artifactId>
