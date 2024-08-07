@@ -23,7 +23,7 @@ public final class CommandsUtils {
         .getIdentifier()
         .getIdentifier(UUID.class)
         .filter(not(isEqual(NIL_UUID)))
-        .map(viewerFacade::getViewerByUniqueId)
+        .map(viewerFacade::getOrCreateViewerByUniqueId)
         .map(Viewer.class::cast)
         .orElse(KyoriViewer.wrap(invocation.sender()));
   }
