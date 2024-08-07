@@ -1,6 +1,5 @@
 package pl.auroramc.integrations.commands.permission;
 
-
 import dev.rollczi.litecommands.handler.result.ResultHandlerChain;
 import dev.rollczi.litecommands.invocation.Invocation;
 import dev.rollczi.litecommands.permission.MissingPermissions;

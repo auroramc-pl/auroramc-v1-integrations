@@ -21,6 +21,7 @@ public abstract class IntegrationsBukkitPlugin extends JavaPlugin {
 
   private static final String I18N_BUNDLE_DIRECTORY_NAME = "i18n";
   private static final String I18N_BUNDLE_FILE_EXTENSION = ".yml";
+  private static final String INTEGRATIONS_BUNDLE_NAME = "integrations_";
   private ConfigFactory configFactory;
   private Scheduler scheduler;
   private BukkitMessageFacade messageFacade;
@@ -37,7 +38,7 @@ public abstract class IntegrationsBukkitPlugin extends JavaPlugin {
     messageCompiler = getBukkitMessageCompiler(scheduler);
 
     integrationsMessageSource =
-        registerMessageSource(IntegrationsMessageSource.class, "integrations_");
+        registerMessageSource(IntegrationsMessageSource.class, INTEGRATIONS_BUNDLE_NAME);
 
     onStartup();
   }
