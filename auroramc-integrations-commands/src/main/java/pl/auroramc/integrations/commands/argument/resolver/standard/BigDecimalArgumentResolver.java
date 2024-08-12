@@ -12,19 +12,19 @@ import dev.rollczi.litecommands.invocation.Invocation;
 import dev.rollczi.litecommands.message.MessageRegistry;
 import java.math.BigDecimal;
 
-public class BigDecimalArgumentResolver<T>
-    extends dev.rollczi.litecommands.argument.resolver.standard.BigDecimalArgumentResolver<T> {
+public class BigDecimalArgumentResolver<SENDER>
+    extends dev.rollczi.litecommands.argument.resolver.standard.BigDecimalArgumentResolver<SENDER> {
 
-  private final MessageRegistry<T> messageRegistry;
+  private final MessageRegistry<SENDER> messageRegistry;
 
-  public BigDecimalArgumentResolver(final MessageRegistry<T> messageRegistry) {
+  public BigDecimalArgumentResolver(final MessageRegistry<SENDER> messageRegistry) {
     super(messageRegistry);
     this.messageRegistry = messageRegistry;
   }
 
   @Override
   protected ParseResult<BigDecimal> parse(
-      final Invocation<T> invocation, final Argument<BigDecimal> context, final String argument) {
+      final Invocation<SENDER> invocation, final Argument<BigDecimal> context, final String argument) {
     try {
       return success(getParsedDecimal(argument).setScale(2, HALF_UP));
     } catch (final NumberFormatException exception) {

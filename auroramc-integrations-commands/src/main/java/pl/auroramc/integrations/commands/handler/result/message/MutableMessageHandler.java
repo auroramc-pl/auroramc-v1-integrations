@@ -29,6 +29,6 @@ public class MutableMessageHandler<SENDER extends Audience, VIEWER extends Viewe
       final MutableMessage message,
       final ResultHandlerChain<SENDER> chain) {
     final Viewer viewer = getViewer(viewerFacade, invocation);
-    messageCompiler.compile(message).deliver(viewer);
+    messageCompiler.compile(viewer, message).deliver(viewer);
   }
 }
