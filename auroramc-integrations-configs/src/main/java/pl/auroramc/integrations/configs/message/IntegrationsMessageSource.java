@@ -5,10 +5,10 @@ import pl.auroramc.messages.i18n.MessageSource;
 public class IntegrationsMessageSource extends MessageSource {
 
   public String messagesRefreshSuccess =
-      "<gradient:#c95e7b:#ed7d95:#ed7d95:#b55e7b>Wiadomości wtyczki zostały przeładowane.";
+      "<gradient:#c95e7b:#ed7d95:#ed7d95:#b55e7b>Wiadomości wtyczki zostały odświeżone.";
 
   public String messagesRefreshFailure =
-      "<gradient:#b51c1c:#d33131:#c72929:#d33131:#b51c1c>Wystąpił błąd podczas przeładowywania wiadomości.";
+      "<gradient:#b51c1c:#d33131:#c72929:#d33131:#b51c1c>Nie udało się odświeżyć wiadomości, z powodu niespodziewanego błędu.";
 
   public String commandOnCooldown =
       "<gradient:#b51c1c:#d33131:#c72929:#d33131:#b51c1c>Musisz odczekać jeszcze <gradient:#ffad33:#ff8052:#ffdb57:#ff8052:#ffdb57:#ffad33><duration><gradient:#b51c1c:#d33131:#c72929:#d33131:#b51c1c>, zanim ponownie użyjesz tej komendy.";

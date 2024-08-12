@@ -1,5 +1,5 @@
-configurationReloadSuccess: "<gradient:#c95e7b:#ed7d95:#ed7d95:#b55e7b>Configuration and plugin messages have been reloaded."
-configurationReloadFailure: "<gradient:#b51c1c:#d33131:#c72929:#d33131:#b51c1c>An error occurred while reloading the configuration and plugin messages."
+messagesRefreshSuccess: "<gradient:#c95e7b:#ed7d95:#ed7d95:#b55e7b>Messages were refreshed."
+messagesRefreshFailure: "<gradient:#b51c1c:#d33131:#c72929:#d33131:#b51c1c>Could not refresh messages, because of unexpected exception."
 commandOnCooldown: "<gradient:#b51c1c:#d33131:#c72929:#d33131:#b51c1c>You need to wait <gradient:#ffad33:#ff8052:#ffdb57:#ff8052:#ffdb57:#ffad33><duration><gradient:#b51c1c:#d33131:#c72929:#d33131:#b51c1c> before using this command again."
 availableSchematicsSuggestion: "<gradient:#b51c1c:#d33131:#c72929:#d33131:#b51c1c>Correct usage: <gradient:#ffad33:#ff8052:#ffdb57:#ff8052:#ffdb57:#ffad33><newline><schematics>"
 executionOfCommandIsNotPermitted: "<gradient:#b51c1c:#d33131:#c72929:#d33131:#b51c1c>You do not have sufficient permissions to use this command."
