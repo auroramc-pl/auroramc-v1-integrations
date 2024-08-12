@@ -1,14 +1,13 @@
 package pl.auroramc.integrations;
 
-import static java.util.Locale.ENGLISH;
 import static pl.auroramc.commons.bukkit.scheduler.BukkitSchedulerFactory.getBukkitScheduler;
-import static pl.auroramc.messages.i18n.BukkitMessageFacade.getBukkitMessageFacade;
 import static pl.auroramc.messages.i18n.MessageSourceUtils.getMessageSourceTemplate;
 import static pl.auroramc.messages.message.compiler.BukkitMessageCompiler.getBukkitMessageCompiler;
 
 import eu.okaeri.configs.OkaeriConfig;
 import eu.okaeri.configs.serdes.OkaeriSerdesPack;
 import eu.okaeri.configs.yaml.bukkit.YamlBukkitConfigurer;
+import java.util.Optional;
 import org.bukkit.plugin.java.JavaPlugin;
 import pl.auroramc.commons.scheduler.Scheduler;
 import pl.auroramc.integrations.configs.ConfigFactory;
@@ -24,7 +23,6 @@ public abstract class IntegrationsBukkitPlugin extends JavaPlugin {
   private static final String INTEGRATIONS_BUNDLE_NAME = "integrations_";
   private ConfigFactory configFactory;
   private Scheduler scheduler;
-  private BukkitMessageFacade messageFacade;
   private BukkitMessageCompiler messageCompiler;
   private IntegrationsMessageSource integrationsMessageSource;
 
@@ -34,11 +32,7 @@ public abstract class IntegrationsBukkitPlugin extends JavaPlugin {
 
     scheduler = getBukkitScheduler(this);
 
-    messageFacade = getBukkitMessageFacade(YamlBukkitConfigurer::new, ENGLISH);
     messageCompiler = getBukkitMessageCompiler(scheduler);
-
-    integrationsMessageSource =
-        registerMessageSource(IntegrationsMessageSource.class, INTEGRATIONS_BUNDLE_NAME);
 
     onStartup();
   }
@@ -53,7 +47,9 @@ public abstract class IntegrationsBukkitPlugin extends JavaPlugin {
   }
 
   protected <T extends MessageSource> T registerMessageSource(
-      final Class<T> messageSourceType, final String bundleName) {
+      final BukkitMessageFacade messageFacade,
+      final Class<T> messageSourceType,
+      final String bundleName) {
     messageFacade.registerMessageSource(
         messageSourceType,
         getFile(),
@@ -64,12 +60,23 @@ public abstract class IntegrationsBukkitPlugin extends JavaPlugin {
     return getMessageSourceTemplate(messageSourceType);
   }
 
-  public Scheduler getScheduler() {
-    return scheduler;
+  protected IntegrationsMessageSource registerIntegrationsMessageSource(
+      final BukkitMessageFacade messageFacade) {
+    return Optional.ofNullable(integrationsMessageSource)
+        .orElseGet(() -> registerIntegrationsMessageSource0(messageFacade));
   }
 
-  public BukkitMessageFacade getMessageFacade() {
-    return messageFacade;
+  private IntegrationsMessageSource registerIntegrationsMessageSource0(
+      final BukkitMessageFacade messageFacade) {
+    final IntegrationsMessageSource messageSource =
+        registerMessageSource(
+            messageFacade, IntegrationsMessageSource.class, INTEGRATIONS_BUNDLE_NAME);
+    this.integrationsMessageSource = messageSource;
+    return messageSource;
+  }
+
+  public Scheduler getScheduler() {
+    return scheduler;
   }
 
   public BukkitMessageCompiler getMessageCompiler() {
